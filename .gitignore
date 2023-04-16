@@ -139,3 +139,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# input, output and processing directories
+!input
+!output
+!processing
