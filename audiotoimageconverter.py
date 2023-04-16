@@ -5,7 +5,8 @@ from PIL import Image
 
 
 # settings
-backwards_if_not_fit = True
+backwards_if_not_fit = True  # default: true, set this to true to take all audio from the end, useful if you have an overlap of 512
+chunk_jump = 512  # default: 512, set this lower for more output files, with more overlap
 
 
 def add_leading_zeroes(s, leading_zero):
@@ -62,7 +63,7 @@ for file in os.listdir(proc_dir):
     diff = width % split_width
     caption_file = os.path.splitext(file)[0]
     print("first pass")
-    for x in range(0, width - split_width, split_width):
+    for x in range(0, width - split_width, chunk_jump):
         box = (x, 0, x + split_width, height)
         filepath = f"{out_dir}/{add_leading_zeroes(counter, 5)}"
         img.crop(box).save(f"{filepath}.png")
@@ -70,7 +71,7 @@ for file in os.listdir(proc_dir):
         counter += 1
     if diff != 0 and backwards_if_not_fit:
         print("second pass (backwards)")
-        for x in range(0, width - split_width, split_width):
+        for x in range(0, width - split_width, chunk_jump):
             box = (width - (x + split_width), 0, width - x, height)
             filepath = f"{out_dir}/{add_leading_zeroes(counter, 5)}"
             img.crop(box).save(f"{filepath}.png")
