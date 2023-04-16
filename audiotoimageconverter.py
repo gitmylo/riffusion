@@ -4,6 +4,10 @@ from riffusion.cli import audio_to_image
 from PIL import Image
 
 
+# settings
+backwards_if_not_fit = True
+
+
 def add_leading_zeroes(s, leading_zero):
     return f"{'0'*leading_zero}{s}"
 
@@ -64,7 +68,7 @@ for file in os.listdir(proc_dir):
         img.crop(box).save(f"{filepath}.png")
         shutil.copyfile(f"{proc_dir}/{caption_file}.txt", f"{filepath}.txt")
         counter += 1
-    if diff != 0:
+    if diff != 0 and backwards_if_not_fit:
         print("second pass (backwards)")
         for x in range(0, width - split_width, split_width):
             box = (width - (x + split_width), 0, width - x, height)
