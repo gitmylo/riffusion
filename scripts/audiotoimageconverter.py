@@ -1,7 +1,8 @@
 from scripts.sharedinfo import WrapMode
 
 
-def run(backwards_if_not_fit=True, chunk_jump=512, wrap_mode=WrapMode.REPEAT.value, in_dir="!input", proc_dir="!processing", out_dir="!output"):
+def run(backwards_if_not_fit: bool = True, chunk_jump: int = 512, wrap_mode: WrapMode = WrapMode.REPEAT.value,
+        in_dir: str = "!input", proc_dir: str = "!processing", out_dir: str = "!output"):
     import os
     import shutil
 
@@ -9,7 +10,7 @@ def run(backwards_if_not_fit=True, chunk_jump=512, wrap_mode=WrapMode.REPEAT.val
     from PIL import Image
 
     def add_leading_zeroes(string, leading_zero):
-        return f"{'0'*leading_zero}{string}"
+        return f"{'0' * leading_zero}{string}"
 
     def remake_dir(directory):
         if os.path.isdir(directory):
@@ -94,25 +95,25 @@ def run(backwards_if_not_fit=True, chunk_jump=512, wrap_mode=WrapMode.REPEAT.val
 if __name__ == '__main__':
     # settings
     s = {
-        "backwards_if_not_fit": True,        # Second pass backwards if size is not a multiple of chunk_jump
-                                             # Default: True
+        "backwards_if_not_fit": True,  # Second pass backwards if size is not a multiple of chunk_jump
+        # Default: True
 
-        "chunk_jump": 512,                   # Size of jumps
-                                             # Default: 512
+        "chunk_jump": 512,  # Size of jumps
+        # Default: 512
 
         "wrap_mode": WrapMode.REPEAT.value,  # What to do if a file is too small.
-                                             # Default: WrapMode.REPEAT.value
-                                             # SKIP: ignore the file,
-                                             # FILL: fill with empty space,
-                                             # REPEAT: repeat the clip to fill
+        # Default: WrapMode.REPEAT.value
+        # SKIP: ignore the file,
+        # FILL: fill with empty space,
+        # REPEAT: repeat the clip to fill
 
-        "in_dir": "!input",                  # The input directory.
-                                             # Default: "!input"
+        "in_dir": "!input",  # The input directory.
+        # Default: "!input"
 
-        "proc_dir": "!processing",          # The processing directory.
-                                             # Default: "!processing"
+        "proc_dir": "!processing",  # The processing directory.
+        # Default: "!processing"
 
-        "out_dir": "!output"                 # The output directory.
-                                             # Default: "!output"
+        "out_dir": "!output"  # The output directory.
+        # Default: "!output"
     }
     run(s["backwards_if_not_fit"], s["chunk_jump"], s["wrap_mode"], s["in_dir"], s["proc_dir"], s["out_dir"])

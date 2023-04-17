@@ -1,4 +1,4 @@
-# Code for image to audio from https://github.com/enlyth/sd-webui-riffusion
+# Code from https://github.com/enlyth/sd-webui-riffusion
 import io
 import torch
 import torchaudio

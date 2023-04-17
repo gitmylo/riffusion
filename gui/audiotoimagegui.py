@@ -1,17 +1,19 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter.ttk import Notebook
+
 from scripts.sharedinfo import WrapMode
 from scripts.audiotoimageconverter import run
 from threading import Thread
 from gui.tab import Tab
 
 
-def get_textbox_value(textbox):
+def get_textbox_value(textbox: Text):
     return textbox.get("1.0", "end").replace("\n", "")
 
 
 class AudioToImageGui(Tab):
-    def create_element(self, root):
+    def create_element(self, root: Notebook):
         tab = ttk.Frame(root)
         top_label = Label(tab, text="Process audio files to trainable data.", anchor="w", font=("arial", 15))
         top_label.pack(fill="x")

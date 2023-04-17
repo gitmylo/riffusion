@@ -2,6 +2,8 @@ import tkinter
 import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog as fd
+from tkinter.ttk import Notebook
+
 from PIL import Image
 from gui.tab import Tab
 from riffusion.cli import audio_to_image
@@ -12,7 +14,8 @@ from threading import Thread
 from playsound import playsound
 from PIL import ImageTk
 
-def remake_dir(directory):
+
+def remake_dir(directory: str):
     if os.path.isdir(directory):
         shutil.rmtree(directory)
     os.mkdir(directory)
@@ -26,7 +29,7 @@ class Previewer(Tab):
     def __init__(self):
         self.file_name: str = ""
         self.open_file: tk.Button = None
-        self.preview_image: tk.Label = None
+        self.preview_image: tk.Canvas = None
         self.play_file: tk.Button = None
         self.save_file_png: tk.Button = None
         self.save_file_wav: tk.Button = None
@@ -41,7 +44,7 @@ class Previewer(Tab):
             return
         Thread(target=self.perform_conversions_threaded, args=(file_name,)).start()
 
-    def perform_conversions_threaded(self, file_name):
+    def perform_conversions_threaded(self, file_name: str):
         self.open_file["state"] = tk.DISABLED
         self.play_file["state"] = tk.DISABLED
         self.save_file_wav["state"] = tk.DISABLED
@@ -78,7 +81,7 @@ class Previewer(Tab):
         shutil.copyfile("tmp/.wav", file_name)
         print(f"Saved {file_name}")
 
-    def create_element(self, root):
+    def create_element(self, root: Notebook):
         tab = ttk.Frame(root)
         top_label = tk.Label(tab, text="Preview and export files", anchor="w", font=("arial", 15))
         top_label.pack(fill="x")
