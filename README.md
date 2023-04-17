@@ -1,3 +1,20 @@
+# Riffusion scripts
+## Current scripts
+* Audio to image converter
+  * Automatically split audio files into chunks of 512x512 pixels
+  * Automatically use caption files (if included). Use title as caption if not included.
+    * Simply place a file with the same name as the audio clip, with .txt instead of .wav.
+    * Example: `audio_file.wav` gets a caption file named `audio_file.txt`, once processed it will be `00000.wav` with `00000.txt`.
+  * Settings:
+    * Backwards pass (backwards_if_not_fit): Get more clips (with overlap) by going backwards from the end if the pixel length isn't an exact multiple of chunk_jump. For better continuation.
+    * Chunk jump (chunk_jump): Change the size of jumps, 512 is no overlap, 256 is for half overlap between clips, can be used as an alternative or in combination with backwards_if_not_fit
+    * Options for changing what to do when an audio file is less than 5.(3/25 aka (12/100)) seconds (wrap_mode).
+      * SKIP: Ignore the file entirely, will ignore all files shorter than 5.(3/25) seconds.
+      * FILL: Fill the missing space with white (no sound) to make the clip end in silence.
+      * REPEAT: Repeat the space to fill, repeats as many times as necessary to fill the entire 5.(3/25) second clip.
+
+# Old readme below V
+
 # :guitar: Riffusion
 
 <a href="https://github.com/riffusion/riffusion/actions/workflows/ci.yml?query=branch%3Amain"><img alt="CI status" src="https://github.com/riffusion/riffusion/actions/workflows/ci.yml/badge.svg" /></a>
