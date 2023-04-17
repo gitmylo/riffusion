@@ -1,5 +1,8 @@
 from tkinter import *
 from gui.tabcontrol import create_tabcontrol
+from torch import cuda
+
+print(f"Cuda available: {cuda.is_available()}")
 
 root = Tk()
 

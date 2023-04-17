@@ -1,13 +1,16 @@
+import tkinter
 import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog as fd
+from PIL import Image
 from gui.tab import Tab
 from riffusion.cli import audio_to_image
 import os
 import shutil
 from scripts.imagetoaudio import image_to_audio
 from threading import Thread
-
+from playsound import playsound
+from PIL import ImageTk
 
 def remake_dir(directory):
     if os.path.isdir(directory):
@@ -15,10 +18,15 @@ def remake_dir(directory):
     os.mkdir(directory)
 
 
+def play_audio_file():
+    playsound("tmp/.wav", False)
+
+
 class Previewer(Tab):
     def __init__(self):
         self.file_name: str = ""
         self.open_file: tk.Button = None
+        self.preview_image: tk.Label = None
         self.play_file: tk.Button = None
         self.save_file_png: tk.Button = None
         self.save_file_wav: tk.Button = None
@@ -35,6 +43,9 @@ class Previewer(Tab):
 
     def perform_conversions_threaded(self, file_name):
         self.open_file["state"] = tk.DISABLED
+        self.play_file["state"] = tk.DISABLED
+        self.save_file_wav["state"] = tk.DISABLED
+        self.save_file_png["state"] = tk.DISABLED
         file_ext_name = os.path.splitext(file_name)[1].lower()
         remake_dir("tmp")
         shutil.copyfile(file_name, f"tmp/{file_ext_name}")
@@ -46,6 +57,12 @@ class Previewer(Tab):
             case _:  # This case should never match due to the file selector not allowing these files to be selected.
                 print("Unable to load this file, not a supported type. Supported types: [\".png\", \".wav\"]")
         self.open_file["state"] = tk.NORMAL
+        self.play_file["state"] = tk.NORMAL
+        self.save_file_wav["state"] = tk.NORMAL
+        self.save_file_png["state"] = tk.NORMAL
+        new_img = ImageTk.PhotoImage(Image.open("tmp/.png"))
+        self.preview_image.create_image(0, 0, image=new_img, anchor=tk.NW, tags="IMG")
+        self.preview_image.image = new_img
 
     def save_png(self):
         file_name = fd.asksaveasfilename(title="Save .png", filetypes=self.file_type_png)
@@ -68,16 +85,21 @@ class Previewer(Tab):
 
         self.open_file = tk.Button(tab, text="Open file", command=self.open_file_dialog)
         self.open_file.pack(fill="x")
-        self.play_file = tk.Button(tab, text="Play opened file (Requires you to have opened a file first)",
-                                   state=tk.DISABLED)
+
+        self.play_file = tk.Button(tab, text="Play opened file audio (Requires you to have opened a file first)",
+                                   state=tk.DISABLED, command=play_audio_file)
         self.play_file.pack(fill="x")
 
         save_frame = tk.Frame(tab)
         save_frame.pack(fill="x")
         self.save_file_png = tk.Button(save_frame, text="Save .png file (Requires you to have opened a file first)",
-                                       state=tk.DISABLED)
+                                       state=tk.DISABLED, command=self.save_file_png)
         self.save_file_png.pack(side=tk.LEFT)
         self.save_file_wav = tk.Button(save_frame, text="Save .wav file (Requires you to have opened a file first)",
-                                       state=tk.DISABLED)
+                                       state=tk.DISABLED, command=self.save_file_wav)
         self.save_file_wav.pack(side=tk.RIGHT)
+
+        self.preview_image = tk.Canvas(tab, bd=0, highlightthickness=0)
+        self.preview_image.pack(fill=tk.BOTH, expand=1)
+
         return tab

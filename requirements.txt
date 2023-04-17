@@ -21,3 +21,4 @@ transformers~=4.28.1
 
 setuptools==67.6.1
 tqdm~=4.65.0
+playsound==1.2.2
