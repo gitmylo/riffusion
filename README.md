@@ -1,5 +1,34 @@
 # Riffusion scripts
-## Setup and usage (Windows, Mac and Linux)
+
+## GUI - setup and usage (Windows, Mac and Linux)
+**Make sure you have [python 3.10](https://www.python.org/downloads/) (or later) installed.**
+* Automatic (Currently windows only):
+    * Run `rungui.bat`
+* Manual (Windows, Mac and Linux):
+  1. Create a venv
+     * Automatic (Windows)
+       1. open a terminal in the project root folder
+       2. run `activate.bat`, it will automatically create the venv if it doesn't exist yet
+     * Manual (Windows, Mac and Linux):
+       1. open a terminal in the project root folder
+       2. run `python -m venv venv` or `py -m venv venv`
+       3. activate the venv:
+          * Windows: run `start venv\Scripts\activate.bat`
+          * Mac and Linux: run `source venv/bin/activate`
+  2. Install packages
+     * run `pip install -r requirements.txt` or `pip install -r requirements_all.txt`
+  3. For running again: activate venv again (**skip this on first run**)
+     * Automatic (Windows)
+       1. open a terminal in the project root folder
+       2. run `activate.bat`
+     * Manual (Windows, Mac and Linux):
+       1. open a terminal in the project root folder
+       2. activate the venv:
+          * Windows: run `start venv\Scripts\activate.bat`
+          * Mac and Linux: run `source venv/bin/activate`
+  4. Run the GUI script
+     * run `python gui.py`
+## OLD - Setup and usage (Windows, Mac and Linux)
 1. Make sure you have [python 3.10](https://www.python.org/downloads/) (or later) installed.
 2. Set up and activate venv
    * Automatic (Windows):
@@ -8,20 +37,20 @@
    * Manual (Windows, Mac and Linux) (Can't test this, so I hope I wrote it correctly):
      1. open a terminal in the project root folder
      2. run `python -m venv venv` or `py -m venv venv`
-     3. activate the venv
+     3. activate the venv:
         * Windows: run `start venv\Scripts\activate.bat`
-        * Mac and Linux: run `venv/bin/activate`
+        * Mac and Linux: run `source venv/bin/activate`
 3. Install packages
    * Run `pip install -r requirements.txt` or `pip install -r requirements_all.txt`
 4. Set the settings in the script you want to run
    * Settings are described per script below
-5. Put your input files into the `!input` folder.
-   * The `!input` will be automatically created on the first run if it doesn't exist. And the script will exit.
+5. Put your input files into the `!input` folder
+   * The `!input` will be automatically created on the first run if it doesn't exist. And the script will exit
 6. Run the script
-   * Run `python script.py` where `script.py` is the name of the script you want to run. For example `python audiotoimageconverter.py`.
+   * Run `python script.py` where `script.py` is the name of the script you want to run. For example `python audiotoimageconverter.py`
 7. Done
-   * The script shows what it's doing at the moment, and when it's done.
-   * Outputs to the `!output` folder.
+   * The script shows what it's doing at the moment, and when it's done
+   * Outputs to the `!output` folder
 
 ## Current scripts
 * Audio to image converter
