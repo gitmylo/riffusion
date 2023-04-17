@@ -3,7 +3,7 @@ if ! [ -e "venv" ]; then
   if [[ $OSTYPE == "msys" || $OSTYPE == "win32" ]]; then
     py -m venv venv
   else
-    python -m venv venv
+    python3 -m venv venv
   fi
   echo Created venv!
 fi
