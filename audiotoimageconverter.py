@@ -99,6 +99,7 @@ for file in os.listdir(proc_dir):
     if diff != 0 and width > split_width and backwards_if_not_fit:
         print("second pass (backwards)")
         for x in range(0, width - split_width + 1, chunk_jump):
+            print(f"at {x}")
             box = (width - (x + split_width), 0, width - x, height)
             filepath = f"{out_dir}/{add_leading_zeroes(counter, 5)}"
             img.crop(box).save(f"{filepath}.png")
