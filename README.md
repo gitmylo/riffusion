@@ -2,15 +2,15 @@
 ## Setup and usage (Windows, Mac and Linux)
 1. Make sure you have [python 3.10](https://www.python.org/downloads/) (or later) installed.
 2. Set up and activate venv
-  * Automatic (Windows):
-    1. run `createvenv.bat`
-    2. run `activate.bat`
-  * Manual (Windows, Mac and Linux) (Can't test this, so I hope I wrote it correctly):
-    1. open a terminal in the project root folder
-    2. run `python -m venv venv` or `py -m venv venv`
-    3. activate the venv
-       * Windows: run `start venv\Scripts\activate.bat`
-       * Mac and Linux: run `venv/bin/activate`
+   * Automatic (Windows):
+     1. run `createvenv.bat`
+     2. run `activate.bat`
+   * Manual (Windows, Mac and Linux) (Can't test this, so I hope I wrote it correctly):
+     1. open a terminal in the project root folder
+     2. run `python -m venv venv` or `py -m venv venv`
+     3. activate the venv
+        * Windows: run `start venv\Scripts\activate.bat`
+        * Mac and Linux: run `venv/bin/activate`
 3. Install packages
    * Run `pip install -r requirements.txt` or `pip install -r requirements_all.txt`
 4. Set the settings in the script you want to run
