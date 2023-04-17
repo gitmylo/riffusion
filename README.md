@@ -2,8 +2,15 @@
 
 ## GUI - setup and usage (Windows, Mac and Linux)
 **Make sure you have [python 3.10](https://www.python.org/downloads/) (or later) installed.**
-* Automatic (Currently windows only):
+* Automatic (Windows, Mac and Linux):
+  * .bat (Windows only):
     * Run `rungui.bat`
+      * A: Run the file by clicking on it
+      * B: Open a cmd in the root folder, and run `rungui.bat`
+  * .sh (Windows (requires bash, like git bash), Mac and Linux)
+    * Run `rungui.sh`
+      * A: Run the file by clicking on it
+      * B: Open a bash shell in the root folder, and run `./rungui.sh`
 * Manual (Windows, Mac and Linux):
   1. Create a venv
      * Automatic (Windows)
