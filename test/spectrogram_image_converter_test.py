@@ -92,6 +92,6 @@ class SpectrogramImageConverterTest(TestCase):
 
         # TODO(hayk): Test something more rigorous about the quality of the reconstruction.
 
-        # If debugging, load up a browser tab plotting the FFTs
+        # If debugging, load up a browser tab.py plotting the FFTs
         if self.DEBUG:
             fft_util.plot_ffts(segments)
