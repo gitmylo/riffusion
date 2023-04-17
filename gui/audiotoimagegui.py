@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
-from sharedinfo import WrapMode
-from audiotoimageconverter import run
+from scripts.sharedinfo import WrapMode
+from scripts.audiotoimageconverter import run
 from threading import Thread
 
 

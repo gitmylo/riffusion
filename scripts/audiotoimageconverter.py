@@ -1,4 +1,4 @@
-from sharedinfo import WrapMode
+from scripts.sharedinfo import WrapMode
 
 
 def run(backwards_if_not_fit=True, chunk_jump=512, wrap_mode=WrapMode.REPEAT.value, in_dir="!input", proc_dir="!processing", out_dir="!output"):
