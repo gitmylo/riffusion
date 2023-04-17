@@ -1,3 +1,44 @@
+# Riffusion scripts
+## Setup and usage (Windows, Mac and Linux)
+1. Make sure you have [python 3.10](https://www.python.org/downloads/) (or later) installed.
+2. Set up and activate venv
+   * Automatic (Windows):
+     1. run `createvenv.bat`
+     2. run `activate.bat`
+   * Manual (Windows, Mac and Linux) (Can't test this, so I hope I wrote it correctly):
+     1. open a terminal in the project root folder
+     2. run `python -m venv venv` or `py -m venv venv`
+     3. activate the venv
+        * Windows: run `start venv\Scripts\activate.bat`
+        * Mac and Linux: run `venv/bin/activate`
+3. Install packages
+   * Run `pip install -r requirements.txt` or `pip install -r requirements_all.txt`
+4. Set the settings in the script you want to run
+   * Settings are described per script below
+5. Put your input files into the `!input` folder.
+   * The `!input` will be automatically created on the first run if it doesn't exist. And the script will exit.
+6. Run the script
+   * Run `python script.py` where `script.py` is the name of the script you want to run. For example `python audiotoimageconverter.py`.
+7. Done
+   * The script shows what it's doing at the moment, and when it's done.
+   * Outputs to the `!output` folder.
+
+## Current scripts
+* Audio to image converter
+  * Automatically split audio files into chunks of 512x512 pixels
+  * Automatically use caption files (if included). Use title as caption if not included.
+    * Simply place a file with the same name as the audio clip, with .txt instead of .wav.
+    * Example: `audio_file.wav` gets a caption file named `audio_file.txt`, once processed it will be `00000.wav` with `00000.txt`.
+  * Settings:
+    * Backwards pass (backwards_if_not_fit): Get more clips (with overlap) by going backwards from the end if the pixel length isn't an exact multiple of chunk_jump. For better continuation.
+    * Chunk jump (chunk_jump): Change the size of jumps, 512 is no overlap, 256 is for half overlap between clips, can be used as an alternative or in combination with backwards_if_not_fit
+    * Options for changing what to do when an audio file is less than 5.(3/25 aka (12/100)) seconds (wrap_mode).
+      * SKIP: Ignore the file entirely, will ignore all files shorter than 5.(3/25) seconds.
+      * FILL: Fill the missing space with white (no sound) to make the clip end in silence.
+      * REPEAT: Repeat the space to fill, repeats as many times as necessary to fill the entire 5.(3/25) second clip.
+
+# Old readme below V
+
 # :guitar: Riffusion
 
 <a href="https://github.com/riffusion/riffusion/actions/workflows/ci.yml?query=branch%3Amain"><img alt="CI status" src="https://github.com/riffusion/riffusion/actions/workflows/ci.yml/badge.svg" /></a>
