@@ -49,23 +49,26 @@ class Previewer(Tab):
         self.play_file["state"] = tk.DISABLED
         self.save_file_wav["state"] = tk.DISABLED
         self.save_file_png["state"] = tk.DISABLED
-        file_ext_name = os.path.splitext(file_name)[1].lower()
-        remake_dir("tmp")
-        shutil.copyfile(file_name, f"tmp/{file_ext_name}")
-        match file_ext_name:
-            case ".png":
-                image_to_audio(image="tmp/.png", audio="tmp/.wav")
-            case ".wav":
-                audio_to_image(audio="tmp/.wav", image="tmp/.png")
-            case _:  # This case should never match due to the file selector not allowing these files to be selected.
-                print("Unable to load this file, not a supported type. Supported types: [\".png\", \".wav\"]")
+        try:
+            file_ext_name = os.path.splitext(file_name)[1].lower()
+            remake_dir("tmp")
+            shutil.copyfile(file_name, f"tmp/{file_ext_name}")
+            match file_ext_name:
+                case ".png":
+                    image_to_audio(image="tmp/.png", audio="tmp/.wav")
+                case ".wav":
+                    audio_to_image(audio="tmp/.wav", image="tmp/.png")
+                case _:  # This case should never match due to the file selector not allowing these files to be selected.
+                    print("Unable to load this file, not a supported type. Supported types: [\".png\", \".wav\"]")
+            self.play_file["state"] = tk.NORMAL
+            self.save_file_wav["state"] = tk.NORMAL
+            self.save_file_png["state"] = tk.NORMAL
+            new_img = ImageTk.PhotoImage(Image.open("tmp/.png"))
+            self.preview_image.create_image(0, 0, image=new_img, anchor=tk.NW, tags="IMG")
+            self.preview_image.image = new_img
+        except Exception as e:
+            print(e)
         self.open_file["state"] = tk.NORMAL
-        self.play_file["state"] = tk.NORMAL
-        self.save_file_wav["state"] = tk.NORMAL
-        self.save_file_png["state"] = tk.NORMAL
-        new_img = ImageTk.PhotoImage(Image.open("tmp/.png"))
-        self.preview_image.create_image(0, 0, image=new_img, anchor=tk.NW, tags="IMG")
-        self.preview_image.image = new_img
 
     def save_png(self):
         file_name = fd.asksaveasfilename(title="Save .png", filetypes=self.file_type_png)
@@ -96,10 +99,10 @@ class Previewer(Tab):
         save_frame = tk.Frame(tab)
         save_frame.pack(fill="x")
         self.save_file_png = tk.Button(save_frame, text="Save .png file (Requires you to have opened a file first)",
-                                       state=tk.DISABLED, command=self.save_file_png)
+                                       state=tk.DISABLED, command=self.save_png)
         self.save_file_png.pack(side=tk.LEFT)
         self.save_file_wav = tk.Button(save_frame, text="Save .wav file (Requires you to have opened a file first)",
-                                       state=tk.DISABLED, command=self.save_file_wav)
+                                       state=tk.DISABLED, command=self.save_wav)
         self.save_file_wav.pack(side=tk.RIGHT)
 
         self.preview_image = tk.Canvas(tab, bd=0, highlightthickness=0)
