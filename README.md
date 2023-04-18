@@ -18,7 +18,7 @@
        2. run `activate.bat`, it will automatically create the venv if it doesn't exist yet
      * Manual (Windows, Mac and Linux):
        1. open a terminal in the project root folder
-       2. run `python -m venv venv` or `py -m venv venv`
+       2. run `python -m venv venv --upgrade-deps` or `py -m venv venv --upgrade-deps`
        3. activate the venv:
           * Windows: run `start venv\Scripts\activate.bat`
           * Mac and Linux: run `source venv/bin/activate`
@@ -43,7 +43,7 @@
      2. run `activate.bat`
    * Manual (Windows, Mac and Linux) (Can't test this, so I hope I wrote it correctly):
      1. open a terminal in the project root folder
-     2. run `python -m venv venv` or `py -m venv venv`
+     2. run `python -m venv venv --upgrade-deps` or `py -m venv venv --upgrade-deps`
      3. activate the venv:
         * Windows: run `start venv\Scripts\activate.bat`
         * Mac and Linux: run `source venv/bin/activate`
