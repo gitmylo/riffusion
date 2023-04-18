@@ -71,16 +71,20 @@ class Previewer(Tab):
         self.open_file["state"] = tk.NORMAL
 
     def save_png(self):
-        file_name = fd.asksaveasfilename(title="Save .png", filetypes=self.file_type_png)
+        file_name = fd.asksaveasfilename(title="Save .png", filetypes=(self.file_type_png,))
         if file_name == "":
             return
+        if not file_name.endswith(".png"):
+            file_name += ".png"
         shutil.copyfile("tmp/.png", file_name)
         print(f"Saved {file_name}")
 
     def save_wav(self):
-        file_name = fd.asksaveasfilename(title="Save .png", filetypes=self.file_type_wav)
+        file_name: str = fd.asksaveasfilename(title="Save .png", filetypes=(self.file_type_wav,))
         if file_name == "":
             return
+        if not file_name.endswith(".wav"):
+            file_name += ".wav"
         shutil.copyfile("tmp/.wav", file_name)
         print(f"Saved {file_name}")
 
