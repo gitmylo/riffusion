@@ -58,13 +58,17 @@ class Previewer(Tab):
                     image_to_audio(image="tmp/.png", audio="tmp/.wav")
                 case ".wav":
                     audio_to_image(audio="tmp/.wav", image="tmp/.png")
-                case _:  # This case should never match due to the file selector not allowing these files to be selected.
+                case _:  # This case should never match due to the file selector not allowing these files to be selected
                     print("Unable to load this file, not a supported type. Supported types: [\".png\", \".wav\"]")
             self.play_file["state"] = tk.NORMAL
             self.save_file_wav["state"] = tk.NORMAL
             self.save_file_png["state"] = tk.NORMAL
-            new_img = ImageTk.PhotoImage(Image.open("tmp/.png"))
-            self.preview_image.create_image(0, 0, image=new_img, anchor=tk.NW, tags="IMG")
+            el_width = self.preview_image.winfo_width()
+            x_offset_base = el_width / 2
+            image_open = Image.open("tmp/.png")
+            new_img = ImageTk.PhotoImage(image_open)
+            x_offset = image_open.width / 2
+            self.preview_image.create_image(x_offset_base - x_offset, 0, image=new_img, anchor=tk.NW, tags="IMG")
             self.preview_image.image = new_img
         except Exception as e:
             print(e)
@@ -110,6 +114,6 @@ class Previewer(Tab):
         self.save_file_wav.pack(side=tk.RIGHT)
 
         self.preview_image = tk.Canvas(tab, bd=0, highlightthickness=0)
-        self.preview_image.pack(fill=tk.BOTH, expand=1)
+        self.preview_image.pack()
 
         return tab
